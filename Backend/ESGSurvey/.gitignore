@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/ESGSurvey.API/bin/Debug/net6.0
+/src/ESGSurvey.API/obj
+/src/ESGSurvey.Data/bin/Debug/net6.0
+/src/ESGSurvey.Data/obj
+/test/ESGSurvey.Test/bin/Debug/net6.0
+/test/ESGSurvey.Test/obj
