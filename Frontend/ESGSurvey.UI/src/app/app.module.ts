@@ -10,6 +10,7 @@ import {  MatTableModule } from '@angular/material/table';
 import {  MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from './services/search.service';
+import { NgxTypedJsModule } from 'ngx-typed-js';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SearchService } from './services/search.service';
     FormsModule,
     BrowserModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxTypedJsModule
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]

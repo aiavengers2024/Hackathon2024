@@ -12,28 +12,33 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './search-list.component.html',
   styleUrls: ['./search-list.component.css']
 })
-export class SearchListComponent implements  AfterViewInit {
+export class SearchListComponent implements AfterViewInit {
   //displayedColumns: string[] = ['fileName', 'searchContent', 'highlightedText', 'People', 'filePath',
   //  'keyphrases'];
-  displayedColumns: string[] = [  'searchContent', 'highlightedText'];
+  displayedColumns: string[] = ['searchContent', 'highlightedText'];
   Results: ISearch[] = [];
-  searchText: any;
+  searchText: any = '';
   dataSource = new MatTableDataSource<ISearch>(this.Results)
-
+  highlightedText: any = '';
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
-  
+
   constructor(private ResultsService: SearchService) {
   }
 
-  
+
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
-  getAllSearchResult(searchText: string){
+  getAllSearchResult(searchText: string) {
     this.ResultsService.getAllSearchResult(searchText).subscribe(responce => {
+      if (responce && responce.length == 0) {
+        this.Results = responce;
+        this.highlightedText = "Please Check your input search text.";
+      }
       this.Results = responce;
+      this.highlightedText = responce[0].searchContent;
       this.dataSource = new MatTableDataSource(this.Results);
     })
 

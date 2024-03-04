@@ -14,7 +14,13 @@
 </div>
 <br />
 
-
+<b [innerHTML]="searchText"></b><b>:</b>
+<br />
+<br />
+<ngx-typed-js id="typewriter1" [strings]="[highlightedText]" [typeSpeed]="10" >
+  <h4 class="typing"></h4>
+</ngx-typed-js>
+<br />
 <table style="width:900px;background-color:darkgray;" mat-table [dataSource]="dataSource" matSort matSortDisableClear="true">
 
   <ng-container matColumnDef="searchContent">
@@ -53,13 +59,10 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
-  <div *ngIf="!(Results) || Results?.length===0">
-    No Record
-  </div>
-  <!--<mat-paginator [pageSizeOptions]="[5, 10, 20]" [style.display]="Results?.length?'block':'none'"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-  </mat-paginator>-->
-
-
-
+<div *ngIf="!(Results) || Results?.length===0">
+  No Record
+</div>
+<!--<mat-paginator [pageSizeOptions]="[5, 10, 20]" [style.display]="Results?.length?'block':'none'"
+               showFirstLastButtons
+               aria-label="Select page of periodic elements">
+</mat-paginator>-->
