@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchService } from './services/search.service';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 
+
 @NgModule({
   declarations: [
     AppComponent,
