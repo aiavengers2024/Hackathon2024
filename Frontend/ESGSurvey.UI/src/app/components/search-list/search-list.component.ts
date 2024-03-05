@@ -35,7 +35,7 @@ export class SearchListComponent implements AfterViewInit {
     this.ResultsService.getAllSearchResult(searchText).subscribe(responce => {
       if (responce && responce.length == 0) {
         this.Results = responce;
-        this.highlightedText = "Please Check your input search text.";
+        this.highlightedText = "Please check your input search text.";
       }
       this.Results = responce;
       this.highlightedText = responce[0].searchContent;

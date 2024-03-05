@@ -34,16 +34,27 @@ namespace ESGSurvey.Data.BusinessObject
                 foreach (var item in result.Results)
                 {
 
-                    var path = item.Document["metadata_storage_path"].ToString();
-                    path = path.Substring(0, path.Length - 1);
-                    var bitData = WebEncoders.Base64UrlDecode(path);
-                    var searchModel = new CognitiveSearchModel
+                    var searchModel = new CognitiveSearchModel();
+                    if (item.Document.ContainsKey("metadata_storage_path"))
                     {
-                        FilePath = System.Text.ASCIIEncoding.ASCII.GetString(bitData),
-                        SearchContent = item.Document["content"].ToString(),
-                        People = string.Join(",", item.Document["people"]) ,
-                        Keyphrases = string.Join(",", item.Document["keyphrases"])
-                };
+                        string? path = item.Document["metadata_storage_path"].ToString();
+                        path = path?.Substring(0, path.Length - 1);
+                        var bitData = WebEncoders.Base64UrlDecode(path);
+                        searchModel.FilePath = System.Text.ASCIIEncoding.ASCII.GetString(bitData);
+                    }
+                    if (item.Document.ContainsKey("content"))
+                    {
+                        searchModel.SearchContent =  item.Document["content"].ToString();
+                    }
+                    
+                    if (item.Document.ContainsKey("people"))
+                    {
+                        searchModel.People = string.Join(",", item.Document["people"]);
+                    }
+                    if (item.Document.ContainsKey("keyphrases"))
+                    {
+                        searchModel.Keyphrases = string.Join(",", item.Document["keyphrases"]);
+                    }
                     if (item.Highlights != null)
                     {
                         foreach (var data in item.Highlights["content"].ToList())
