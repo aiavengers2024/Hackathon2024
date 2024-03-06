@@ -7,5 +7,6 @@
         string CognitiveServiceApiKey { get; }
         string AzureStorageConnectionString { get; }
         string AzureStorageBlobContainerName { get; }
+        string CognitiveServiceUrl { get; }
     }
 }

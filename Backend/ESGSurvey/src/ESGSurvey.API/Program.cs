@@ -14,6 +14,8 @@ builder.Services.AddTransient<ICognitiveSearchServicesCore, CognitiveSearchServi
 .AddTransient<ICognitiveSearchServicesBO, CognitiveSearchServicesBO>()
 .AddTransient<IBlobServiceCore, BlobServiceCore>()
 .AddTransient<IBlobServiceBO, BlobServiceBO>()
+.AddTransient<IOpenAIServiceCore, OpenAIServiceCore>()
+.AddTransient<IOpenAIServiceBO, OpenAIServiceBO>()
 .AddSingleton<IConfigurationSettings, ConfigurationSettings>();
 
 
