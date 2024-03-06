@@ -25,6 +25,14 @@ namespace ESGSurvey.Data.BusinessObject
 
         public string CognitiveServiceUrl => _configuration["AzureStorage:CognitiveServiceUrl"];
 
+        public string SearchIndexerName => _configuration["AzureStorage:SearchIndexerName"];
+
+        public string OpenAIApiBase => _configuration["AzureStorage:OpenAIApiBase"];
+
+        public string OpenAIKey => _configuration["AzureStorage:OpenAIKey"];
+
+        public string OpenAIDeploymentId => _configuration["AzureStorage:OpenAIDeploymentId"];
+
         #endregion
 
     }

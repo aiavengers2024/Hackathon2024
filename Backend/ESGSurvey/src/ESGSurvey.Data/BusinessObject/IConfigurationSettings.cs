@@ -8,5 +8,13 @@
         string AzureStorageConnectionString { get; }
         string AzureStorageBlobContainerName { get; }
         string CognitiveServiceUrl { get; }
+        string SearchIndexerName { get; }
+
+        string OpenAIApiBase { get; }
+        string OpenAIKey { get; }
+        string OpenAIDeploymentId { get; }
+
+
+
     }
 }
