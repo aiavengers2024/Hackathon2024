@@ -151,7 +151,7 @@ namespace ESGSurvey.Data.BusinessObject
                                     new Uri(_configuration.CognitiveServiceUrl),
                                     new AzureKeyCredential(_configuration.CognitiveServiceApiKey));
 
-                Response indexerResponse = indexerClient.RunIndexer(_configuration.CognitiveServiceIndexName);
+                Response indexerResponse = indexerClient.RunIndexer(_configuration.SearchIndexerName);
                 if (indexerResponse != null)
                 {
                     if (indexerResponse.Status == 202)
