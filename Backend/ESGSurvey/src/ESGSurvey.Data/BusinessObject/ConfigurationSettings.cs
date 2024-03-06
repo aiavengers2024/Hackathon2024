@@ -18,9 +18,12 @@ namespace ESGSurvey.Data.BusinessObject
         public string CognitiveServiceIndexName => _configuration["CognitiveSearch:CognitiveServiceIndexName"];
 
         public string CognitiveServiceApiKey => _configuration["CognitiveSearch:CognitiveServiceApiKey"];
+
         public string AzureStorageConnectionString => _configuration["AzureStorage:AzureStorageConnectionString"];
 
         public string AzureStorageBlobContainerName => _configuration["AzureStorage:AzureStorageBlobContainerName"];
+
+        public string CognitiveServiceUrl => _configuration["AzureStorage:CognitiveServiceUrl"];
 
         #endregion
 

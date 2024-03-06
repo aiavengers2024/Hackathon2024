@@ -14,10 +14,18 @@ namespace ESGSurvey.Data.BusinessObject
 
         public async Task<Uri> UploadFileBlobAsync(Stream content,  string fileName)
         {
-            var containerClient = GetContainerClient(_configuration.AzureStorageBlobContainerName);
-            var blobClient = containerClient.GetBlobClient(fileName);
-            await blobClient.UploadAsync(content );
-            return blobClient.Uri;
+            try
+            {
+                var containerClient = GetContainerClient(_configuration.AzureStorageBlobContainerName);
+                var blobClient = containerClient.GetBlobClient(fileName);
+                await blobClient.UploadAsync(content);
+                return blobClient.Uri;
+            }
+            catch (Exception ex )
+            {
+
+                throw ex;
+            }
         }
 
         private BlobContainerClient GetContainerClient(string blobContainerName)
@@ -26,7 +34,7 @@ namespace ESGSurvey.Data.BusinessObject
             {
                 BlobServiceClient _blobServiceClient = new BlobServiceClient(_configuration.AzureStorageConnectionString);
                 var containerClient = _blobServiceClient.GetBlobContainerClient(blobContainerName);
-                containerClient.CreateIfNotExists(PublicAccessType.Blob);
+                containerClient.CreateIfNotExists();
                 return containerClient;
             }
             catch (Exception ex)

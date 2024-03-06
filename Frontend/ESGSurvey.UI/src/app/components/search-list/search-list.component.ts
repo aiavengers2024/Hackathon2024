@@ -33,10 +33,11 @@ export class SearchListComponent implements AfterViewInit {
   }
   getAllSearchResult(searchText: string) {
     this.ResultsService.getAllSearchResult(searchText).subscribe(responce => {
-      if (responce && responce.length == 0) {
+      if (responce && responce.length === 0) {
         this.Results = responce;
         this.highlightedText = "Please check your input search text.";
       }
+      console.log(responce);
       this.Results = responce;
       this.highlightedText = responce[0].searchContent;
       this.dataSource = new MatTableDataSource(this.Results);
