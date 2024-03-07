@@ -1,6 +1,6 @@
 ﻿namespace ESGSurvey.Data.SampleModel
 {
-    public class CognitiveSearchModel
+    public class AzureAISearchModel
     {
         public string? FileName { get; set; }
         public string? Extension { get; set; }

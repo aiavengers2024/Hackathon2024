@@ -13,19 +13,20 @@ namespace ESGSurvey.Data.BusinessObject
             _configuration = configuration;
         }
         #region Public Prop(s)
-        public string CognitiveServiceName => _configuration["CognitiveSearch:CognitiveServiceName"];
+        public string AzureAIServiceName => _configuration["AzureAISearch:AzureAIServiceName"];
 
-        public string CognitiveServiceIndexName => _configuration["CognitiveSearch:CognitiveServiceIndexName"];
+        public string AzureAIServiceIndexName => _configuration["AzureAISearch:AzureAIServiceIndexName"];
 
-        public string CognitiveServiceApiKey => _configuration["CognitiveSearch:CognitiveServiceApiKey"];
+        public string AzureAIServiceApiKey => _configuration["AzureAISearch:AzureAIServiceApiKey"];
 
-        public string AzureStorageConnectionString => _configuration["AzureStorage:AzureStorageConnectionString"];
+        public string AzureAIServiceUrl => _configuration["AzureAISearch:AzureAIServiceUrl"];
 
-        public string AzureStorageBlobContainerName => _configuration["AzureStorage:AzureStorageBlobContainerName"];
+        public string AzureAISearchIndexerName => _configuration["AzureAISearch:AzureAISearchIndexerName"];
 
-        public string CognitiveServiceUrl => _configuration["AzureStorage:CognitiveServiceUrl"];
 
-        public string SearchIndexerName => _configuration["AzureStorage:SearchIndexerName"];
+        public string StorageConnectionString => _configuration["AzureStorage:StorageConnectionString"];
+
+        public string StorageBlobContainerName => _configuration["AzureStorage:StorageBlobContainerName"];
 
         public string OpenAIApiBase => _configuration["AzureStorage:OpenAIApiBase"];
 

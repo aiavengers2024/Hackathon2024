@@ -8,16 +8,16 @@ namespace ESGSurvey.API.ApiControllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors]
-    public class CognitiveSearchServicesController : ControllerBase
+    public class AzureAISearchServicesController : ControllerBase
     {
         #region Global Variable(s)
         private readonly IConfigurationSettings _configuration;
-        private readonly ICognitiveSearchServicesCore _cognitiveSearchServicesCore;
+        private readonly IAzureAISearchServicesCore _azureAISearchServicesCore;
         #endregion
 
-        public CognitiveSearchServicesController(ICognitiveSearchServicesCore cognitiveSearchServicesCore, IConfigurationSettings configuration)
+        public AzureAISearchServicesController(IAzureAISearchServicesCore azureAISearchServicesCore, IConfigurationSettings configuration)
         {
-            _cognitiveSearchServicesCore = cognitiveSearchServicesCore;
+            _azureAISearchServicesCore = azureAISearchServicesCore;
             _configuration = configuration;
         }
        
@@ -25,8 +25,15 @@ namespace ESGSurvey.API.ApiControllers
         [HttpPost]
         public async Task<IActionResult> Search(string SearchText)
         {
-            var response = await _cognitiveSearchServicesCore.Search(SearchText);
-            return Ok(response);
+            try
+            {
+                var response = await _azureAISearchServicesCore.Search(SearchText);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
         #endregion 
         

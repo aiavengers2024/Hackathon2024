@@ -7,11 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.Configure<ConfigurationSettings>(builder.Configuration.GetSection("CognitiveSearch"));
+//builder.Services.Configure<ConfigurationSettings>(builder.Configuration.GetSection("AzureAISearch"));
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddTransient<ICognitiveSearchServicesCore, CognitiveSearchServicesCore>()
-.AddTransient<ICognitiveSearchServicesBO, CognitiveSearchServicesBO>()
+builder.Services.AddTransient<IAzureAISearchServicesCore, AzureAISearchServicesCore>()
+.AddTransient<IAzureAISearchServicesBO, AzureAISearchServicesBO>()
 .AddTransient<IBlobServiceCore, BlobServiceCore>()
 .AddTransient<IBlobServiceBO, BlobServiceBO>()
 .AddTransient<IOpenAIServiceCore, OpenAIServiceCore>()

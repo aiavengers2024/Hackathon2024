@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchListComponent } from './upload-files.component';
+import { SearchListComponent } from './search-list.component';
 
 describe('SearchListComponent', () => {
   let component: SearchListComponent;

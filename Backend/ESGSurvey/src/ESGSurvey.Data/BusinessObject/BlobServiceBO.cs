@@ -16,9 +16,9 @@ namespace ESGSurvey.Data.BusinessObject
         {
             try
             {
-                var containerClient = GetContainerClient(_configuration.AzureStorageBlobContainerName);
+                var containerClient = GetContainerClient(_configuration.StorageBlobContainerName);
                 var blobClient = containerClient.GetBlobClient(fileName);
-                await blobClient.UploadAsync(content);
+                await blobClient.UploadAsync(content,overwrite:true);
                 return blobClient.Uri;
             }
             catch (Exception ex )
@@ -32,7 +32,7 @@ namespace ESGSurvey.Data.BusinessObject
         {
             try
             {
-                BlobServiceClient _blobServiceClient = new BlobServiceClient(_configuration.AzureStorageConnectionString);
+                BlobServiceClient _blobServiceClient = new BlobServiceClient(_configuration.StorageConnectionString);
                 var containerClient = _blobServiceClient.GetBlobContainerClient(blobContainerName);
                 containerClient.CreateIfNotExists();
                 return containerClient;

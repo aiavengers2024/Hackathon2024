@@ -8,14 +8,14 @@ using Microsoft.Azure.Search.Models;
 
 namespace ESGSurvey.Data.BusinessObject
 {
-    public class CognitiveSearchServicesBO : ICognitiveSearchServicesBO
+    public class AzureAISearchServicesBO : IAzureAISearchServicesBO
     {
         #region Global Variable(s)
 
         private readonly IConfigurationSettings _configuration;
         #endregion
 
-        public CognitiveSearchServicesBO(IConfigurationSettings configuration)
+        public AzureAISearchServicesBO(IConfigurationSettings configuration)
         {
             _configuration = configuration;
         }
@@ -24,23 +24,23 @@ namespace ESGSurvey.Data.BusinessObject
 
         #region Public Method(s)
 
-        public async Task<List<CognitiveSearchModel>> Search(string search)
+        public async Task<List<AzureAISearchModel>> Search(string searchText)
         {
             try
             {
-                SearchServiceClient serviceClient = new SearchServiceClient(_configuration.CognitiveServiceName, new SearchCredentials(_configuration.CognitiveServiceApiKey));
-                ISearchIndexClient indexClient = serviceClient.Indexes.GetClient(_configuration.CognitiveServiceIndexName);
+                SearchServiceClient serviceClient = new SearchServiceClient(_configuration.AzureAIServiceName, new SearchCredentials(_configuration.AzureAIServiceApiKey));
+                ISearchIndexClient indexClient = serviceClient.Indexes.GetClient(_configuration.AzureAIServiceIndexName);
                 SearchParameters parameters = new SearchParameters();
                 parameters.HighlightFields = new List<string> { "content" };
                 parameters.HighlightPreTag = "<br/>";
                 parameters.HighlightPostTag = "<br/>";
-                var result = indexClient.Documents.SearchAsync(search, parameters).Result;
-                List<CognitiveSearchModel> searchResult = new List<CognitiveSearchModel>();
+                var result = indexClient.Documents.SearchAsync(searchText, parameters).Result;
+                List<AzureAISearchModel> searchResult = new List<AzureAISearchModel>();
 
                 foreach (var item in result.Results)
                 {
 
-                    var searchModel = new CognitiveSearchModel();
+                    var searchModel = new AzureAISearchModel();
                     if (item.Document.ContainsKey("metadata_storage_path"))
                     {
                         if (item.Document["metadata_storage_path"] != null)
@@ -148,17 +148,17 @@ namespace ESGSurvey.Data.BusinessObject
             try
             {
                 SearchIndexerClient indexerClient = new SearchIndexerClient(
-                                    new Uri(_configuration.CognitiveServiceUrl),
-                                    new AzureKeyCredential(_configuration.CognitiveServiceApiKey));
+                                    new Uri(_configuration.AzureAIServiceUrl),
+                                    new AzureKeyCredential(_configuration.AzureAIServiceApiKey));
 
-                Response indexerResponse = indexerClient.RunIndexer(_configuration.SearchIndexerName);
+                Response indexerResponse = indexerClient.RunIndexer(_configuration.AzureAISearchIndexerName);
                 if (indexerResponse != null)
                 {
                     if (indexerResponse.Status == 202)
                     {
-                        Thread.Sleep(5000);
+                        Thread.Sleep(180000);
 
-                        if (CheckIndexerStatus(indexerClient, _configuration.CognitiveServiceIndexName))
+                        if (CheckIndexerStatus(indexerClient, _configuration.AzureAISearchIndexerName))
                         {
                             return true;
                         }

@@ -15,5 +15,10 @@ export class SearchService {
     console.log(body)
     return this.http.post(ApiUrlConstants.CognitiveSearchServices+searchText, { 'headers': headers })
   }
-  
+  getAllAISearchResult(searchText: string): Observable<any> {
+    const headers = new HttpHeaders({ 'content-type': 'application/json' });
+    const body = JSON.stringify(searchText);
+    console.log(body)
+    return this.http.post(ApiUrlConstants.OpenAIServiceServices + searchText, { 'headers': headers })
+  }
 }
