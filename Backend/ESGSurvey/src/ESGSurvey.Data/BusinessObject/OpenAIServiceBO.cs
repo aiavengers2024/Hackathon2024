@@ -5,78 +5,60 @@ namespace ESGSurvey.Data.BusinessObject
 {
     public class OpenAIServiceBO : IOpenAIServiceBO
     {
-        public Task<Response<ChatCompletions>> GenerateChatTextAsync(string chatInput)
+        #region Global Variable(s)
+        private readonly IConfigurationSettings _configuration;
+        private readonly OpenAIClient _client;
+        private ChatCompletionsOptions _options;
+        #endregion
+
+        public OpenAIServiceBO(IConfigurationSettings configuration)
         {
-            throw new NotImplementedException();
+            this._configuration = configuration;
+            _client = new OpenAIClient(new Uri(_configuration.OpenAIApiBase), new AzureKeyCredential(_configuration.OpenAIKey));
+            ConnectToAzureAISearch();
+        }
+      
+        #region Public Method(s)
+        public async Task<Response<ChatCompletions>> GenerateChatTextAsync(string searchText)
+        {
+            List<ChatMessage> messages = new List<ChatMessage>()
+            {
+                new ChatMessage(ChatRole.User, searchText)
+            };
+
+            InitializeChatMessages(messages);
+            var result = await _client.GetChatCompletionsAsync(_configuration.OpenAIDeploymentId, _options);
+            return result;
+        }
+        #endregion
+       
+        #region Private Method(s)
+        private void ConnectToAzureAISearch()
+        {
+            _options = new ChatCompletionsOptions()
+            {
+                AzureExtensionsOptions = new AzureChatExtensionsOptions()
+                {
+                    Extensions =
+                    {
+                        new AzureCognitiveSearchChatExtensionConfiguration()
+                        {
+                            SearchEndpoint = new Uri(_configuration.AzureAIServiceUrl),
+                            IndexName = _configuration.AzureAISearchIndexerName,
+                            SearchKey = new AzureKeyCredential(_configuration.AzureAIServiceApiKey)
+                        }
+                    }
+                }
+            };
         }
 
-        //private readonly ILogger<AzOpenAIService> _logger;
-        //private readonly IConfiguration _configuration;
-        //private readonly OpenAIClient _client;
-
-        //private ChatCompletionsOptions _options;
-
-        //private readonly string _azOpenAIApiBase = string.Empty;
-        //private readonly string _azOpenAIKey = string.Empty;
-        //private readonly string _searchServiceEndpoint = string.Empty;
-        //private readonly string _searchIndexName = string.Empty;
-        //private readonly string _searchApiKey = string.Empty;
-        //private readonly string _azOpenAIDeploymentId = string.Empty;
-
-        //public AzOpenAIService(ILogger<AzOpenAIService> logger, IConfiguration configuration)
-        //{
-        //    this._logger = logger;
-        //    this._configuration = configuration;
-
-        //    _azOpenAIApiBase = _configuration.GetValue<string>("AzOpenAIApiBase");
-        //    _azOpenAIKey = _configuration.GetValue<string>("AzOpenAIKey");
-        //    _azOpenAIDeploymentId = _configuration.GetValue<string>("AzOpenAIDeploymentId");
-
-        //    _searchServiceEndpoint = _configuration.GetValue<string>("SearchServiceEndpoint");
-        //    _searchIndexName = _configuration.GetValue<string>("SearchIndexName");
-        //    _searchApiKey = _configuration.GetValue<string>("SearchApiKey");
-
-        //    _client = new OpenAIClient(new Uri(_azOpenAIApiBase), new AzureKeyCredential(_azOpenAIKey));
-        //    CreateChatCompletionOptions();
-        //}
-
-        //public async Task<Response<ChatCompletions>> GenerateTextAsync(string chatInput)
-        //{
-        //    List<ChatMessage> messages = new List<ChatMessage>()
-        //    {
-        //        new ChatMessage(ChatRole.User, chatInput)
-        //    };
-
-        //    InitializeMessages(messages);
-        //    var result = await _client.GetChatCompletionsAsync(_azOpenAIDeploymentId, _options);
-        //    return result;
-        //}
-
-        //private void CreateChatCompletionOptions()
-        //{
-        //    _options = new ChatCompletionsOptions()
-        //    {
-        //        AzureExtensionsOptions = new AzureChatExtensionsOptions()
-        //        {
-        //            Extensions =
-        //            {
-        //                new AzureCognitiveSearchChatExtensionConfiguration()
-        //                {
-        //                    SearchEndpoint = new Uri(_searchServiceEndpoint),
-        //                    IndexName = _searchIndexName,
-        //                    SearchKey = new AzureKeyCredential(_searchApiKey)
-        //                }
-        //            }
-        //        }
-        //    };
-        //}
-
-        //private void InitializeMessages(List<ChatMessage> chatMessages)
-        //{
-        //    foreach (var chatMessage in chatMessages)
-        //    {
-        //        _options.Messages.Add(chatMessage);
-        //    }
-        //}
+        private void InitializeChatMessages(List<ChatMessage> chatMessages)
+        {
+            foreach (var chatMessage in chatMessages)
+            {
+                _options.Messages.Add(chatMessage);
+            }
+        }
+        #endregion
     }
 }

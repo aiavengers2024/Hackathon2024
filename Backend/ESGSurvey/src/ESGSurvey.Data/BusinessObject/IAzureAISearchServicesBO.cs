@@ -2,9 +2,9 @@
 
 namespace ESGSurvey.Data.BusinessObject
 {
-    public interface ICognitiveSearchServicesBO
+    public interface IAzureAISearchServicesBO
     {
-        Task<List<CognitiveSearchModel>> Search(string search);
+        Task<List<AzureAISearchModel>> Search(string searchText);
         bool RunAndCheckIndexer();
     }
 }

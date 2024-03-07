@@ -4,7 +4,7 @@ namespace ESGSurvey.Data.BusinessObject
 {
     public interface IOpenAIServiceBO
     {
-        Task<Response<ChatCompletions>> GenerateChatTextAsync(string chatInput);
+        Task<Response<ChatCompletions>> GenerateChatTextAsync(string searchText);
 
     }
 }

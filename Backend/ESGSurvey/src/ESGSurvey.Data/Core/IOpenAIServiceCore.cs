@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Azure;
+using Azure.AI.OpenAI;
 namespace ESGSurvey.Data.Core
 {
     public interface IOpenAIServiceCore
     {
+        Task<Response<ChatCompletions>> GenerateChatTextAsync(string searchText);
     }
 }
