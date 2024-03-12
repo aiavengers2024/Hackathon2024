@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { SearchService } from './services/search.service';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 import { AISearchComponent } from './components/ai-search/ai-search.component';
+import { ChatboxComponent } from './components/chatbox/chatbox.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AISearchComponent } from './components/ai-search/ai-search.component';
     AppComponent,
     UploadFilesComponent,
     SearchListComponent,
-    AISearchComponent
+    AISearchComponent,
+    ChatboxComponent
   ],
   imports: [
     MatTableModule,

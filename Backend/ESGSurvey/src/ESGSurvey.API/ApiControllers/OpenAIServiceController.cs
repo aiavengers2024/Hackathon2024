@@ -33,5 +33,11 @@ namespace ESGSurvey.API.ApiControllers
             }
         }
 
+        [HttpPost("test")]
+        public IActionResult Test(string SearchText)
+        {
+            return new JsonResult("testing");
+        }
+
     }
 }

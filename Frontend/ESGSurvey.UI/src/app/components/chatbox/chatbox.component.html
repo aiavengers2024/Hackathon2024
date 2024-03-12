@@ -1,0 +1,9 @@
+<ng-container class="message-container" *ngFor="let message of messages">
+    <div class="message"
+    [ngClass]="{ 'from': message.author === 'openai',
+    'to': message.author === 'user' }">
+    {{ message.content }}
+    </div>
+    </ng-container>
+    <input class="input-field" [(ngModel)]="value" (keyup.enter)="sendMessage()" type="text"/>
+    <button class="button-active" (click)="sendMessage()">Send</button>
