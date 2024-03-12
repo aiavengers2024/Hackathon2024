@@ -5,7 +5,7 @@
     line-height: 1;
     height: 2.25rem;
     width: 5vw;
-    margin-left: 1vw;
+    margin-left: 2vw;
     outline: none;
     border: none;
   }
@@ -17,7 +17,7 @@
   }
 .message {
     border-radius: 50px;
-    margin: 0 15px 20px;
+    margin: 10px 15px 20px;
     padding: 10px 20px;
     position: relative;
     font-size: 20px;
@@ -44,12 +44,21 @@
     padding: 0.25em 0.5em;
     background-color: #fff;
     border-radius: 15px;
-    line-height: 1;
-    height: 2.25rem;
-    width: 45vw;
-    margin-left: 1vw;
+    line-height: 3.25rem;
+    height: 4.25rem;
+    width: 43vw;
+    outline: none;
+    border: none;
   }
   .message-container{
-    height: 30vh;
-    border:#9b4dca 2px; 
+    overflow-y: scroll;
+    height: 40vh;
+    border:  grey 2px solid;
+    border-radius: 15px;
+    width: 51vw;
+  }
+  .actions-border{
+    width: 51vw;
+    border-radius: 15px;
+    border:  grey 2px solid; 
   }

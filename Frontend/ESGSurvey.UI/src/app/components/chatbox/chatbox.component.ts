@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatboxService } from '../../services/chatbox.service';
 import { Message } from 'src/app/models/Message';
 
@@ -10,6 +10,7 @@ import { Message } from 'src/app/models/Message';
 export class ChatboxComponent implements OnInit {
   messages: Message[] = [];
   value: string;
+  @ViewChild('messageContainer') messageContainer: ElementRef
 
   constructor(public chatService: ChatboxService) { }
 
@@ -17,6 +18,10 @@ export class ChatboxComponent implements OnInit {
       this.chatService.conversation.subscribe((val) => {
       this.messages = this.messages.concat(val);
     });
+  }
+  scrollToBottom() {
+      if(this.messageContainer.nativeElement.scrollHeight > this.messageContainer.nativeElement.clientHeight)
+        this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
   }
 
   sendMessage() {

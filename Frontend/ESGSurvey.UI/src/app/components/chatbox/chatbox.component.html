@@ -1,9 +1,14 @@
-<ng-container class="message-container" *ngFor="let message of messages">
-    <div class="message"
-    [ngClass]="{ 'from': message.author === 'openai',
-    'to': message.author === 'user' }">
-    {{ message.content }}
-    </div>
+<div #messageContainer class="message-container">
+    <ng-container *ngFor="let message of messages; let last = last">
+        <div class="message"
+        [ngClass]="{ 'from': message.author === 'openai',
+        'to': message.author === 'user' }">
+        {{ message.content }}
+        </div>
+        {{last ? scrollToBottom() : ''}}
     </ng-container>
+</div>
+<div class="actions-border">
     <input class="input-field" [(ngModel)]="value" (keyup.enter)="sendMessage()" type="text"/>
-    <button class="button-active" (click)="sendMessage()">Send</button>
+    <button class="button-active" (click)="sendMessage()">Ask</button>
+</div>
