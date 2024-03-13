@@ -20,6 +20,9 @@ export class SearchListComponent implements AfterViewInit {
   searchText: any = '';
   dataSource = new MatTableDataSource<ISearch>(this.Results)
   highlightedText: any = '';
+  filePath: any = '';
+  fileName: any = '';
+
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
@@ -40,6 +43,8 @@ export class SearchListComponent implements AfterViewInit {
       console.log(responce);
       this.Results = responce;
       this.highlightedText = responce[0].searchContent;
+      this.filePath = responce[0].filePath;
+      this.fileName = responce[0].fileName;
       this.dataSource = new MatTableDataSource(this.Results);
     })
 
