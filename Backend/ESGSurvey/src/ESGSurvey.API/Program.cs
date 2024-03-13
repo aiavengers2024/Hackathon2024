@@ -10,6 +10,14 @@ builder.Services.AddEndpointsApiExplorer();
 //builder.Services.Configure<ConfigurationSettings>(builder.Configuration.GetSection("AzureAISearch"));
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddApplicationInsightsTelemetry();
+
+var aiOptions = new Microsoft.ApplicationInsights.AspNetCore.Extensions.ApplicationInsightsServiceOptions();
+// Disables adaptive sampling.
+aiOptions.EnableAdaptiveSampling = false;
+aiOptions.EnableQuickPulseMetricStream = false;
+builder.Services.AddApplicationInsightsTelemetry(aiOptions);
+
 builder.Services.AddTransient<IAzureAISearchServicesCore, AzureAISearchServicesCore>()
 .AddTransient<IAzureAISearchServicesBO, AzureAISearchServicesBO>()
 .AddTransient<IBlobServiceCore, BlobServiceCore>()
@@ -17,7 +25,6 @@ builder.Services.AddTransient<IAzureAISearchServicesCore, AzureAISearchServicesC
 .AddTransient<IOpenAIServiceCore, OpenAIServiceCore>()
 .AddTransient<IOpenAIServiceBO, OpenAIServiceBO>()
 .AddSingleton<IConfigurationSettings, ConfigurationSettings>();
-
 
 
 builder.Services.AddCors(options =>
