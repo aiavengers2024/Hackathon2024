@@ -156,7 +156,7 @@ namespace ESGSurvey.Data.BusinessObject
                 {
                     if (indexerResponse.Status == 202)
                     {
-                        Thread.Sleep(180000);
+                        Thread.Sleep(50000);
 
                         if (CheckIndexerStatus(indexerClient, _configuration.AzureAISearchIndexerName))
                         {

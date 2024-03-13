@@ -9,5 +9,7 @@
 /Backend/ESGSurvey/src/ESGSurvey.API/Properties/ServiceDependencies/esg-survey-response-automation-api - Web Deploy
 /Backend/ESGSurvey/test/ESGSurvey.Test/bin/Release/net6.0
 /Backend/ESGSurvey/src/ESGSurvey.Data/bin/Release/net6.0
-/Backend/ESGSurvey/src/ESGSurvey.API
+
 /Frontend/ESGSurvey.UI/.vscode
+/Backend/ESGSurvey/src/ESGSurvey.API/.config
+/Backend/ESGSurvey/src/ESGSurvey.API/ESGSurvey.API.csproj.user
