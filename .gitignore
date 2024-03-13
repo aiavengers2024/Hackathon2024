@@ -4,3 +4,10 @@
 
 /.vs
 /Frontend/ESGSurvey.UI/.vs
+/Backend/ESGSurvey/src/ESGSurvey.API/bin/Release/net6.0
+/Backend/ESGSurvey/src/ESGSurvey.API/Properties/PublishProfiles
+/Backend/ESGSurvey/src/ESGSurvey.API/Properties/ServiceDependencies/esg-survey-response-automation-api - Web Deploy
+/Backend/ESGSurvey/test/ESGSurvey.Test/bin/Release/net6.0
+/Backend/ESGSurvey/src/ESGSurvey.Data/bin/Release/net6.0
+/Backend/ESGSurvey/src/ESGSurvey.API
+/Frontend/ESGSurvey.UI/.vscode

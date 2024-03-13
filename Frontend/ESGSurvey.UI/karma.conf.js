@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/azure-open-aiweb'),
+      dir: require('path').join(__dirname, './coverage/esg-survey-response-automation'),
       subdir: '.',
       reporters: [
         { type: 'html' },

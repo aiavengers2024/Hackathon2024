@@ -17,7 +17,8 @@
 <br />
 <br />
 <ngx-typed-js id="typewriter" [strings]="[highlightedText]" [typeSpeed]="10">
-  <h4 class="typing"></h4>
+  <h4 class="typing" style="overflow-y:auto;height:200px !important;"></h4>
+  <a href="{{filePath}}">{{fileName}}</a>
 </ngx-typed-js>
 <br />
 <table style="width:900px;background-color:darkgray;" mat-table [dataSource]="dataSource" matSort matSortDisableClear="true">

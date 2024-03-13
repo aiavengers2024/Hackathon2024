@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AzureOpenAIWeb": {
+    "esg-survey-response-automation": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/azure-open-aiweb",
+            "outputPath": "dist/esg-survey-response-automation",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "AzureOpenAIWeb:build:production"
+              "browserTarget": "esg-survey-response-automation:build:production"
             },
             "development": {
-              "browserTarget": "AzureOpenAIWeb:build:development"
+              "browserTarget": "esg-survey-response-automation:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AzureOpenAIWeb:build"
+            "browserTarget": "esg-survey-response-automation:build"
           }
         },
         "test": {
