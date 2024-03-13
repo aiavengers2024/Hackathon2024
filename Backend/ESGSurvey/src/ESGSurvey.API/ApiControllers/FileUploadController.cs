@@ -31,22 +31,29 @@ namespace ESGSurvey.API.ApiControllers
                 }
                 else
                 {
-                    string FileName = Path.GetFileName(FilePath);
-                    using (var fileStream = System.IO.File.OpenRead(FilePath))
+                    if (System.IO.File.Exists(FilePath))
                     {
-                        if (fileStream == null)
+                        string FileName = Path.GetFileName(FilePath);
+                        using (var fileStream = System.IO.File.OpenRead(FilePath))
                         {
-                            return BadRequest();
-                        }
-                        else
-                        {
-                            var output = await _blobServiceCore.UploadFileBlobAsync(fileStream, FileName);
-                            if (output != null)
+                            if (fileStream == null)
                             {
-                                var isRunAndCheckIndexer = _azureAISearchServicesCore.RunAndCheckIndexer();
+                                return BadRequest();
                             }
-                            return Ok(output);
+                            else
+                            {
+                                var output = await _blobServiceCore.UploadFileBlobAsync(fileStream, FileName);
+                                if (output != null)
+                                {
+                                    var isRunAndCheckIndexer = _azureAISearchServicesCore.RunAndCheckIndexer();
+                                }
+                                return Ok(output);
+                            }
                         }
+                    }
+                    else
+                    {
+                        return BadRequest();
                     }
                 }
             }

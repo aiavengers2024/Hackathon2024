@@ -31,24 +31,31 @@ namespace ESGSurvey.API.ApiControllers
                 }
                 else
                 {
-                    string[] fileEntries = Directory.GetFiles(DirectoryPath);
-                    foreach (string fileName in fileEntries)
+                    if (Directory.Exists(DirectoryPath))
                     {
-                        string FileName = Path.GetFileName(fileName);
-                        var fileStream = System.IO.File.OpenRead(fileName);
-                        if (fileStream == null)
+                        string[] fileEntries = Directory.GetFiles(DirectoryPath);
+                        foreach (string fileName in fileEntries)
                         {
-                            return BadRequest();
-                        }
-                        else
-                        {
-                            var output = await _blobServiceCore.UploadFileBlobAsync(fileStream, FileName);
-                            if (output != null)
+                            string FileName = Path.GetFileName(fileName);
+                            var fileStream = System.IO.File.OpenRead(fileName);
+                            if (fileStream == null)
                             {
-                                var isRunAndCheckIndexer = _azureAISearchServicesCore.RunAndCheckIndexer();
+                                return BadRequest();
                             }
+                            else
+                            {
+                                var output = await _blobServiceCore.UploadFileBlobAsync(fileStream, FileName);
+                                if (output != null)
+                                {
+                                    var isRunAndCheckIndexer = _azureAISearchServicesCore.RunAndCheckIndexer();
+                                }
 
+                            }
                         }
+                    }
+                    else
+                    {
+                        return BadRequest();
                     }
                     return Ok();
                 }
