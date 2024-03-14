@@ -28,11 +28,11 @@ namespace ESGSurvey.Data.BusinessObject
 
         public string StorageBlobContainerName => _configuration["AzureStorage:StorageBlobContainerName"];
 
-        public string OpenAIApiBase => _configuration["AzureStorage:OpenAIApiBase"];
+        public string OpenAIApiBase => _configuration["OpenAI:OpenAIApiBase"];
 
-        public string OpenAIKey => _configuration["AzureStorage:OpenAIKey"];
+        public string OpenAIKey => _configuration["OpenAI:OpenAIKey"];
 
-        public string OpenAIDeploymentId => _configuration["AzureStorage:OpenAIDeploymentId"];
+        public string OpenAIDeploymentId => _configuration["OpenAI:OpenAIDeploymentId"];
 
         #endregion
 
