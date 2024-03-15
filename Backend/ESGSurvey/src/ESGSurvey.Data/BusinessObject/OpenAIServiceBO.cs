@@ -1,5 +1,7 @@
 ﻿using Azure;
 using Azure.AI.OpenAI;
+using ESGSurvey.Data.Constants;
+using ESGSurvey.Data.SampleModel;
 
 namespace ESGSurvey.Data.BusinessObject
 {
@@ -17,21 +19,33 @@ namespace ESGSurvey.Data.BusinessObject
             _client = new OpenAIClient(new Uri(_configuration.OpenAIApiBase), new AzureKeyCredential(_configuration.OpenAIKey));
             ConnectToAzureAISearch();
         }
-      
+
         #region Public Method(s)
-        public async Task<Response<ChatCompletions>> GenerateChatTextAsync(string searchText)
+        //public async Task<Response<ChatCompletions>> GenerateChatTextAsync(string searchText);
+        public async Task<OpenAIOutputResponseModel> GenerateChatTextAsync(string searchText)
         {
             List<ChatMessage> messages = new List<ChatMessage>()
             {
                 new ChatMessage(ChatRole.User, searchText)
             };
-
             InitializeChatMessages(messages);
             var result = await _client.GetChatCompletionsAsync(_configuration.OpenAIDeploymentId, _options);
-            return result;
+            if (result != null && result.Value != null && result.Value.Choices.Any())
+            {
+                string rawContent = string.Empty;
+                if (result.GetRawResponse() != null && result.GetRawResponse().Content != null)
+                {
+                    rawContent = result.GetRawResponse().Content.ToString();
+                }
+                return new OpenAIOutputResponseModel { RawResponse = result, Content = result.Value.Choices[0].Message.Content, RawContent = rawContent };
+            }
+            else
+            {
+                return new OpenAIOutputResponseModel { RawResponse = null, Content = CommonConstants.SearchResultNotFound, RawContent = "" };
+            }
         }
         #endregion
-       
+
         #region Private Method(s)
         private void ConnectToAzureAISearch()
         {
@@ -44,8 +58,7 @@ namespace ESGSurvey.Data.BusinessObject
                         new AzureCognitiveSearchChatExtensionConfiguration()
                         {
                             SearchEndpoint = new Uri(_configuration.AzureAIServiceUrl),
-                            //IndexName = _configuration.AzureAISearchIndexerName,
-                            IndexName = _configuration.AzureAIServiceIndexName, 
+                            IndexName = _configuration.AzureAIServiceIndexName,
                             SearchKey = new AzureKeyCredential(_configuration.AzureAIServiceApiKey)
                         }
                     }

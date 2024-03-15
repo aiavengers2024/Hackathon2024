@@ -39,7 +39,8 @@ namespace ESGSurvey.API.ApiControllers
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
         #endregion 
