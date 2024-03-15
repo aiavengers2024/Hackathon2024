@@ -16,52 +16,7 @@
 <b [innerHTML]="searchText"></b><b>:</b>
 <br />
 <br />
-<ngx-typed-js id="typewriter" [strings]="[highlightedText]" [typeSpeed]="10" >
-  <h4 class="typing"></h4>
+<ngx-typed-js id="typewriter" [strings]="[content]" [typeSpeed]="10">
+  <h4 class="typing" style="overflow-y:auto;height:200px !important;"></h4>
 </ngx-typed-js>
 <br />
-<table style="width:900px;background-color:darkgray;" mat-table [dataSource]="dataSource" matSort matSortDisableClear="true">
-
-  <ng-container matColumnDef="searchContent">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="searchContent" sortActionDescription="Sort by search Content"> Search Content </th>
-    <td mat-cell *matCellDef="let element"> {{element.searchContent}} </td>
-  </ng-container>
-  <!--<ng-container matColumnDef="filePath">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="filePath" sortActionDescription="Sort by filePath"> File Path </th>
-    <td mat-cell *matCellDef="let element"> {{element.filePath}} </td>
-  </ng-container>-->
-  <ng-container matColumnDef="highlightedText">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="highlightedText" sortActionDescription="Sort by highlightedText"> Highlighted Text </th>
-    <td mat-cell *matCellDef="let element" style="vertical-align:top"> <div [innerHTML]="element.highlightedText"></div> </td>
-  </ng-container>
-  <!--
-    <ng-container matColumnDef="fileName">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="fileName" sortActionDescription="Sort by file Name">File Name </th>
-    <td mat-cell *matCellDef="let element">
-      <a routerLink="/categoriedetails">{{element.fileName}}</a>
-    </td>
-  </ng-container>
-
-    <ng-container matColumnDef="keyphrases">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="keyphrases" sortActionDescription="Sort by keyphrases"> Key phrases </th>
-    <td mat-cell *matCellDef="let element"> {{element.keyphrases}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="People">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="People" sortActionDescription="Sort by People"> People </th>
-    <td mat-cell *matCellDef="let element"> {{element.People}} </td>
-  </ng-container>
-
-    -->
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-</table>
-<div *ngIf="!(Results) || Results?.length===0">
-  No Record
-</div>
-<!--<mat-paginator [pageSizeOptions]="[5, 10, 20]" [style.display]="Results?.length?'block':'none'"
-               showFirstLastButtons
-               aria-label="Select page of periodic elements">
-</mat-paginator>-->

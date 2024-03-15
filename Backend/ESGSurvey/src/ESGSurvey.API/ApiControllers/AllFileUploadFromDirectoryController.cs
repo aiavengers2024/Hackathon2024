@@ -11,13 +11,15 @@ namespace ESGSurvey.API.ApiControllers
         private readonly IConfigurationSettings _configuration;
         private readonly IBlobServiceCore _blobServiceCore;
         private readonly IAzureAISearchServicesCore _azureAISearchServicesCore;
+        private readonly ILogger _logger;
         #endregion
 
-        public AllFileUploadFromDirectoryController(IBlobServiceCore blobServiceCore, IAzureAISearchServicesCore azureAISearchServicesCore, IConfigurationSettings configuration)
+        public AllFileUploadFromDirectoryController(IBlobServiceCore blobServiceCore, IAzureAISearchServicesCore azureAISearchServicesCore, IConfigurationSettings configuration, ILogger<AllFileUploadFromDirectoryController> logger)
         {
             _blobServiceCore = blobServiceCore;
             _azureAISearchServicesCore = azureAISearchServicesCore;
             _configuration = configuration;
+            _logger = logger;
         }
 
         [HttpPost(""), DisableRequestSizeLimit]
@@ -62,7 +64,8 @@ namespace ESGSurvey.API.ApiControllers
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
     }

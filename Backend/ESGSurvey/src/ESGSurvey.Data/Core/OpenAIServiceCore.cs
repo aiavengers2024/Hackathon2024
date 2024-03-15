@@ -1,7 +1,6 @@
-﻿using Azure;
-using Azure.AI.OpenAI;
-using ESGSurvey.Data.BusinessObject;
+﻿using ESGSurvey.Data.BusinessObject;
 using ESGSurvey.Data.Constants;
+using ESGSurvey.Data.SampleModel;
 
 namespace ESGSurvey.Data.Core
 {
@@ -17,9 +16,10 @@ namespace ESGSurvey.Data.Core
             _openAIServiceBO = openAIServiceBO;
             _configuration = configuration;
         }
-       
+
         #region Public Method(s)
-        public Task<Response<ChatCompletions>> GenerateChatTextAsync(string searchText)
+        public Task<OpenAIOutputResponseModel> GenerateChatTextAsync(string searchText)
+        //public Task<Response<ChatCompletions>> GenerateChatTextAsync(string searchText)
         {
             if (!string.IsNullOrWhiteSpace(searchText))
             {

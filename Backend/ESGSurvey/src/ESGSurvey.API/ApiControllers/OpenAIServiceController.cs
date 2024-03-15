@@ -11,12 +11,14 @@ namespace ESGSurvey.API.ApiControllers
         #region Global Variable(s)
         private readonly IConfigurationSettings _configuration;
         private readonly IOpenAIServiceCore _openAIServiceCore;
+        private readonly ILogger _logger;
         #endregion
 
-        public OpenAIServiceController(IOpenAIServiceCore openAIServiceCore, IConfigurationSettings configuration)
+        public OpenAIServiceController(IOpenAIServiceCore openAIServiceCore, IConfigurationSettings configuration, ILogger<OpenAIServiceController> logger)
         {
             _openAIServiceCore = openAIServiceCore;
             _configuration = configuration;
+            _logger = logger;
         }
 
         [HttpPost(""), DisableRequestSizeLimit]
@@ -29,7 +31,8 @@ namespace ESGSurvey.API.ApiControllers
             }
             catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex.StackTrace);
+                return BadRequest(ex.Message);
             }
         }
 
