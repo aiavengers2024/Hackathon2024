@@ -15,3 +15,9 @@ export interface ISearch {
   score: string;
   language: string;
 }
+export interface IOpenAISearch {
+  content: string;
+  rawContent: string;
+  rawResponse: object;
+}
+

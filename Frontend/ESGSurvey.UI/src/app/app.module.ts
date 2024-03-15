@@ -11,7 +11,7 @@ import {  MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from './services/search.service';
 import { NgxTypedJsModule } from 'ngx-typed-js';
-import { AISearchComponent } from './components/ai-search/ai-search.component';
+import { AIOpenAISearchComponent } from './components/ai-search/ai-search.component';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { AISearchComponent } from './components/ai-search/ai-search.component';
     AppComponent,
     UploadFilesComponent,
     SearchListComponent,
-    AISearchComponent
+    AIOpenAISearchComponent
   ],
   imports: [
     MatTableModule,
