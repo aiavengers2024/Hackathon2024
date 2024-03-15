@@ -44,7 +44,8 @@ namespace ESGSurvey.Data.BusinessObject
                         new AzureCognitiveSearchChatExtensionConfiguration()
                         {
                             SearchEndpoint = new Uri(_configuration.AzureAIServiceUrl),
-                            IndexName = _configuration.AzureAISearchIndexerName,
+                            //IndexName = _configuration.AzureAISearchIndexerName,
+                            IndexName = _configuration.AzureAIServiceIndexName, 
                             SearchKey = new AzureKeyCredential(_configuration.AzureAIServiceApiKey)
                         }
                     }
